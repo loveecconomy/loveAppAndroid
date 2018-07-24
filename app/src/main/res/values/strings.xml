@@ -5,11 +5,11 @@
     <string name="enter_email">email</string>
     <string name="enter_pass">password</string>
     <string name="login_btn">Login</string>
-    <string name="title_activity_dashboard">dashboard</string>
+    <string name="title_activity_dashboard">Love Economy</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Cyberick</string>
+    <string name="nav_header_subtitle">ericabbey.8gig@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 </resources>
