@@ -1,5 +1,8 @@
 package com.loveeconomy.loveeconomy;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,17 +41,14 @@ public class Dashboard extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }else{
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,7 +58,7 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.nav_setting) {
             return true;
         }
 
@@ -80,13 +80,26 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_saved) {
 
         } else if (id == R.id.nav_logout) {
-
-        } else if (id == R.id.nav_share) {
+            logout();
+        } else if (id == R.id.nav_branch) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void redirectToLogin(){
+        Intent signIn = new Intent(getApplicationContext(), SignInActivity.class);
+        startActivity(signIn);
+    }
+
+    public void logout () {
+        SharedPreferences activeSession = this.getSharedPreferences("com.loveeconomy.loveeconomy", Context.MODE_PRIVATE);
+        activeSession.edit().putString("auth_token", "").apply();
+        String token  = activeSession.getString("auth_token", "");
+        if(token == ""){
+            redirectToLogin();
+        }
     }
 }
